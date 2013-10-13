@@ -1,4 +1,5 @@
-package it.qwan.vender;
+package eu.qwan.vender;
+
 public class Chipknip {
 	public int credits;
 

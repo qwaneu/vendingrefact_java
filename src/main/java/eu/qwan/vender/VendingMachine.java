@@ -1,10 +1,10 @@
-package it.qwan.vender;
+package eu.qwan.vender;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class VendingMachine {
-	private Map<Choice, CanContainer> cans = new HashMap<Choice, CanContainer>();
+	private final Map<Choice, CanContainer> cans = new HashMap<Choice, CanContainer>();
 	private int payment_method;
 	private Chipknip chipknip;
 	private int c = -1;
