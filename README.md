@@ -82,4 +82,4 @@ References
 Authors
 =======
 Marc Evers, Rob Westgeest, Willem van den Ende  
-QWAN - Quality Without a Name - https://www.qwan.eu
+© copyright QWAN - Quality Without a Name - https://www.qwan.eu
