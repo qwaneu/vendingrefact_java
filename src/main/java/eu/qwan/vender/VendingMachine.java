@@ -9,7 +9,7 @@ public class VendingMachine {
 	private Chipknip chipknip;
 	private int credit = -1;
 
-	public void set_value(int v) {
+	public void setValue(int v) {
 		paymentMethod = 1;
 		if (credit != -1) {
 			credit += v;
@@ -18,7 +18,7 @@ public class VendingMachine {
 		}
 	}
 
-	public void insert_chip(Chipknip chipknip) {
+	public void insertChip(Chipknip chipknip) {
 		// TODO
 		// can't pay with chip in brittain
 		paymentMethod = 2;
