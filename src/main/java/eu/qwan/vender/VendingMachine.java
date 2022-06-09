@@ -21,13 +21,9 @@ public class VendingMachine {
 
 	public Can deliver(Choice choice) {
 		if (cans.containsKey(choice))
-			return purchase(choice);
+			return cashier.purchase(this, cans.get(choice));
 		else
 			return Can.NONE;
-	}
-
-	private Can purchase(Choice choice) {
-		return cashier.purchase(this, cans.get(choice));
 	}
 
 	public int getChange() {
@@ -39,19 +35,19 @@ public class VendingMachine {
 		return 0;
 	}
 
-	public void configure(Choice choice, Can c, int n) {
-		configure(choice, c, n, 0);
+	public void configure(Choice choice, Can can, int amount) {
+		configure(choice, can, amount, 0);
 	}
 
-	public void configure(Choice choice, Can c, int n, int price) {
+	public void configure(Choice choice, Can can, int amount, int price) {
 		if (cans.containsKey(choice)) {
-			cans.get(choice).setAmount(cans.get(choice).getAmount() + n);
-			return;
+			cans.get(choice).setAmount(cans.get(choice).getAmount() + amount);
+		} else {
+			CanContainer canContainer = new CanContainer();
+			canContainer.setType(can);
+			canContainer.setAmount(amount);
+			canContainer.setPrice(price);
+			cans.put(choice, canContainer);
 		}
-		CanContainer can = new CanContainer();
-		can.setType(c);
-		can.setAmount(n);
-		can.setPrice(price);
-		cans.put(choice, can);
 	}
 }
