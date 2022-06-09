@@ -15,32 +15,21 @@ public class VendingMachine {
 	}
 
 	public void insertCard(Card card) {
-		// TODO
-		// can't pay with chip in brittain
 		paymentMethod = PaymentMethod.CARD;
 		this.card = card;
 	}
 
-	// delivers the can if all ok {
 	public Can deliver(Choice choice) {
 		Can res = Can.none;
-		//
-		// step 1: check if choice exists {
-		//
 		if (!cans.containsKey(choice)) return Can.none;
-		//
-		// step2 : check price
-		//
 		switch (paymentMethod) {
-			case CASH: // paying with coins
+			case CASH:
 				if (credit != -1 && cans.get(choice).price <= credit) {
 					res = cans.get(choice).getType();
 					credit -= cans.get(choice).price;
 				}
 				break;
-			case CARD: // paying with chipknip -
-				// TODO: if this machine is in belgium this must be an error
-				// {
+			case CARD:
 				if (card.hasValue(cans.get(choice).price)) {
 					card.reduce(cans.get(choice).price);
 					res = cans.get(choice).getType();
@@ -48,9 +37,6 @@ public class VendingMachine {
 				break;
 		}
 
-		//
-		// step 3: check stock
-		//
 		if (res != Can.none) {
 			if (cans.get(choice).getAmount() <= 0) {
 				res = Can.none;
