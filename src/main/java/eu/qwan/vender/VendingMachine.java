@@ -6,7 +6,7 @@ import java.util.Map;
 public class VendingMachine {
 	private final Map<Choice, CanContainer> cans = new HashMap<>();
 	private int paymentMethod;
-	private Chipknip chipknip;
+	private Card card;
 	private int credit = -1;
 
 	public void setValue(int v) {
@@ -18,11 +18,11 @@ public class VendingMachine {
 		}
 	}
 
-	public void insertChip(Chipknip chipknip) {
+	public void insertChip(Card card) {
 		// TODO
 		// can't pay with chip in brittain
 		paymentMethod = 2;
-		this.chipknip = chipknip;
+		this.card = card;
 	}
 
 	// delivers the can if all ok {
@@ -50,8 +50,8 @@ public class VendingMachine {
 				case 2: // paying with chipknip -
 					// TODO: if this machine is in belgium this must be an error
 					// {
-					if (chipknip.hasValue(cans.get(choice).price)) {
-						chipknip.reduce(cans.get(choice).price);
+					if (card.hasValue(cans.get(choice).price)) {
+						card.reduce(cans.get(choice).price);
 						res = cans.get(choice).getType();
 					}
 					break;
