@@ -31,12 +31,7 @@ public class VendingMachine {
 		//
 		// step2 : check price
 		//
-		if (cans.get(choice).price == 0) {
-			res = cans.get(choice).getType();
-			// or price matches
-		} else {
-
-			switch (paymentMethod) {
+		switch (paymentMethod) {
 			case CASH: // paying with coins
 				if (credit != -1 && cans.get(choice).price <= credit) {
 					res = cans.get(choice).getType();
@@ -51,7 +46,6 @@ public class VendingMachine {
 					res = cans.get(choice).getType();
 				}
 				break;
-			}
 		}
 
 		//
