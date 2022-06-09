@@ -7,15 +7,11 @@ public class VendingMachine {
 	private final Map<Choice, CanContainer> cans = new HashMap<>();
 	private PaymentMethod paymentMethod = PaymentMethod.CASH;
 	private Card card;
-	private int credit = -1;
+	private int credit;
 
 	public void setValue(int value) {
 		paymentMethod = PaymentMethod.CASH;
-		if (credit != -1) {
-			credit += value;
-		} else {
-			credit = value;
-		}
+		credit += value;
 	}
 
 	public void insertCard(Card card) {
@@ -55,14 +51,6 @@ public class VendingMachine {
 					res = cans.get(choice).getType();
 				}
 				break;
-			default:
-				// TODO: Is this a valid situation?:
-				// larry forgot the } else { clause
-				// i added it, but i am acutally not sure as to wether this
-				// is a problem
-				// unknown payment
-				break;
-			// i think(i) nobody inserted anything
 			}
 		}
 
