@@ -76,8 +76,8 @@ public class VendingMachineTest {
 	public void Testreturns_change() {
 		machine.configure(Choice.sprite, Can.sprite, 10, 1);
 		machine.set_value(2);
-		assertEquals(2, machine.get_change());
-		assertEquals(0, machine.get_change());
+		assertEquals(2, machine.getChange());
+		assertEquals(0, machine.getChange());
 	}
 
 	@Test

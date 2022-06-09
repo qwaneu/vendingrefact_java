@@ -5,23 +5,23 @@ import java.util.Map;
 
 public class VendingMachine {
 	private final Map<Choice, CanContainer> cans = new HashMap<>();
-	private int payment_method;
+	private int paymentMethod;
 	private Chipknip chipknip;
-	private int c = -1;
+	private int credit = -1;
 
 	public void set_value(int v) {
-		payment_method = 1;
-		if (c != -1) {
-			c += v;
+		paymentMethod = 1;
+		if (credit != -1) {
+			credit += v;
 		} else {
-			c = v;
+			credit = v;
 		}
 	}
 
 	public void insert_chip(Chipknip chipknip) {
 		// TODO
 		// can't pay with chip in brittain
-		payment_method = 2;
+		paymentMethod = 2;
 		this.chipknip = chipknip;
 	}
 
@@ -40,18 +40,18 @@ public class VendingMachine {
 				// or price matches
 			} else {
 
-				switch (payment_method) {
+				switch (paymentMethod) {
 				case 1: // paying with coins
-					if (c != -1 && cans.get(choice).price <= c) {
+					if (credit != -1 && cans.get(choice).price <= credit) {
 						res = cans.get(choice).getType();
-						c -= cans.get(choice).price;
+						credit -= cans.get(choice).price;
 					}
 					break;
 				case 2: // paying with chipknip -
 					// TODO: if this machine is in belgium this must be an error
 					// {
-					if (chipknip.HasValue(cans.get(choice).price)) {
-						chipknip.Reduce(cans.get(choice).price);
+					if (chipknip.hasValue(cans.get(choice).price)) {
+						chipknip.reduce(cans.get(choice).price);
 						res = cans.get(choice).getType();
 					}
 					break;
@@ -89,11 +89,11 @@ public class VendingMachine {
 		return res;
 	}
 
-	public int get_change() {
+	public int getChange() {
 		int to_return = 0;
-		if (c > 0) {
-			to_return = c;
-			c = 0;
+		if (credit > 0) {
+			to_return = credit;
+			credit = 0;
 		}
 		return to_return;
 	}
