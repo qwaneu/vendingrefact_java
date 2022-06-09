@@ -20,7 +20,7 @@ public class VendingMachine {
 	}
 
 	public Can deliver(Choice choice) {
-		if (cans.containsKey(choice))
+		if (cans.containsKey(choice)  && cans.get(choice).getAmount() > 0)
 			return cashier.purchase(this, cans.get(choice));
 		else
 			return Can.NONE;

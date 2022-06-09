@@ -6,7 +6,7 @@ public class CashRegister implements Cashier {
 
     @Override
     public Can purchase(VendingMachine vendingMachine, CanContainer canContainer) {
-        if (canContainer.getPrice() <= vendingMachine.credit && canContainer.getAmount() > 0) {
+        if (canContainer.getPrice() <= vendingMachine.credit) {
             vendingMachine.credit -= canContainer.getPrice();
             canContainer.setAmount(canContainer.getAmount() - 1);
             return canContainer.getType();
