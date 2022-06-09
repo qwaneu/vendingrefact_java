@@ -1,5 +1,5 @@
 package eu.qwan.vender;
 
 enum Choice {
-	none, cola, fanta, sprite, beer
+	NONE, COLA, FANTA, SPRITE, BEER
 }

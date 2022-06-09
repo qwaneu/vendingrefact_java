@@ -23,7 +23,7 @@ public class VendingMachine {
 		if (cans.containsKey(choice))
 			return purchase(choice);
 		else
-			return Can.none;
+			return Can.NONE;
 	}
 
 	private Can purchase(Choice choice) {
@@ -43,7 +43,7 @@ public class VendingMachine {
 				}
 				break;
 		}
-		return Can.none;
+		return Can.NONE;
 	}
 
 	public int getChange() {
