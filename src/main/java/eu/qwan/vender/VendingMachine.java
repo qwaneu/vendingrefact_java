@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VendingMachine {
-	private final Map<Choice, CanContainer> cans = new HashMap<Choice, CanContainer>();
+	private final Map<Choice, CanContainer> cans = new HashMap<>();
 	private int payment_method;
 	private Chipknip chipknip;
 	private int c = -1;
