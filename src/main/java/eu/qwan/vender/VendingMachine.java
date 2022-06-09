@@ -82,12 +82,12 @@ public class VendingMachine {
 	}
 
 	public int getChange() {
-		int to_return = 0;
+		int result = credit;
 		if (credit > 0) {
-			to_return = credit;
 			credit = 0;
+			return result;
 		}
-		return to_return;
+		return 0;
 	}
 
 	public void configure(Choice choice, Can c, int n) {
