@@ -24,27 +24,20 @@ public class VendingMachine {
 		if (!cans.containsKey(choice)) return Can.none;
 		switch (paymentMethod) {
 			case CASH:
-				if (credit != -1 && cans.get(choice).price <= credit) {
-					res = cans.get(choice).getType();
+				if (cans.get(choice).price <= credit && cans.get(choice).getAmount() > 0) {
 					credit -= cans.get(choice).price;
+					cans.get(choice).setAmount(cans.get(choice).getAmount() - 1);
+					res = cans.get(choice).getType();
 				}
 				break;
 			case CARD:
-				if (card.hasValue(cans.get(choice).price)) {
+				if (card.hasValue(cans.get(choice).price) && cans.get(choice).getAmount() > 0) {
 					card.reduce(cans.get(choice).price);
+					cans.get(choice).setAmount(cans.get(choice).getAmount() - 1);
 					res = cans.get(choice).getType();
 				}
 				break;
 		}
-
-		if (res != Can.none) {
-			if (cans.get(choice).getAmount() <= 0) {
-				res = Can.none;
-			} else {
-				cans.get(choice).setAmount(cans.get(choice).getAmount() - 1);
-			}
-		}
-
 		return res;
 	}
 
