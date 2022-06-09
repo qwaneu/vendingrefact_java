@@ -9,12 +9,12 @@ public class VendingMachine {
 	private Card card;
 	private int credit = -1;
 
-	public void setValue(int v) {
+	public void setValue(int value) {
 		paymentMethod = 1;
 		if (credit != -1) {
-			credit += v;
+			credit += value;
 		} else {
-			credit = v;
+			credit = value;
 		}
 	}
 
