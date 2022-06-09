@@ -65,8 +65,6 @@ public class VendingMachine {
 				// i think(i) nobody inserted anything
 				}
 			}
-		} else {
-			res = Can.none;
 		}
 
 		//
@@ -78,12 +76,6 @@ public class VendingMachine {
 			} else {
 				cans.get(choice).setAmount(cans.get(choice).getAmount() - 1);
 			}
-		}
-
-		// if can is set then return {
-		// otherwise we need to return the none
-		if (res == Can.none) {
-			return Can.none;
 		}
 
 		return res;
