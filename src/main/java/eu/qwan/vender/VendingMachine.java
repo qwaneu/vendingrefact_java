@@ -4,17 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VendingMachine {
-	private final Map<Choice, CanContainer> cans = new HashMap<>();
+	public final Map<Choice, CanContainer> cans = new HashMap<>();
 	private PaymentMethod paymentMethod = PaymentMethod.CASH;
-	private Card card;
-	private int credit;
+	private Cashier cashier = new CashRegister();
+	public Card card;
+	public int credit;
 
 	public void setValue(int value) {
+		cashier = new CashRegister();
 		paymentMethod = PaymentMethod.CASH;
 		credit += value;
 	}
 
 	public void insertCard(Card card) {
+		cashier = new CardRegister();
 		paymentMethod = PaymentMethod.CARD;
 		this.card = card;
 	}
@@ -27,23 +30,16 @@ public class VendingMachine {
 	}
 
 	private Can purchase(Choice choice) {
+		Can result = Can.NONE;
 		switch (paymentMethod) {
 			case CASH:
-				if (cans.get(choice).price <= credit && cans.get(choice).getAmount() > 0) {
-					credit -= cans.get(choice).price;
-					cans.get(choice).setAmount(cans.get(choice).getAmount() - 1);
-					return cans.get(choice).getType();
-				}
+				result = cashier.purchase(this, cans.get(choice));
 				break;
 			case CARD:
-				if (card.hasValue(cans.get(choice).price) && cans.get(choice).getAmount() > 0) {
-					card.reduce(cans.get(choice).price);
-					cans.get(choice).setAmount(cans.get(choice).getAmount() - 1);
-					return cans.get(choice).getType();
-				}
+				result = cashier.purchase(this, cans.get(choice));
 				break;
 		}
-		return Can.NONE;
+		return result;
 	}
 
 	public int getChange() {

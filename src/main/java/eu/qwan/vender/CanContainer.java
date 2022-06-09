@@ -2,7 +2,7 @@ package eu.qwan.vender;
 
 public class CanContainer {
 	private Can type;
-	int price;
+	private int price;
 	private int amount;
 
 	public Can getType() {
