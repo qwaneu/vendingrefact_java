@@ -5,20 +5,17 @@ import java.util.Map;
 
 public class VendingMachine {
 	public final Map<Choice, CanContainer> cans = new HashMap<>();
-	private PaymentMethod paymentMethod = PaymentMethod.CASH;
 	private Cashier cashier = new CashRegister();
 	public Card card;
 	public int credit;
 
 	public void setValue(int value) {
 		cashier = new CashRegister();
-		paymentMethod = PaymentMethod.CASH;
 		credit += value;
 	}
 
 	public void insertCard(Card card) {
 		cashier = new CardRegister();
-		paymentMethod = PaymentMethod.CARD;
 		this.card = card;
 	}
 
@@ -30,16 +27,7 @@ public class VendingMachine {
 	}
 
 	private Can purchase(Choice choice) {
-		Can result = Can.NONE;
-		switch (paymentMethod) {
-			case CASH:
-				result = cashier.purchase(this, cans.get(choice));
-				break;
-			case CARD:
-				result = cashier.purchase(this, cans.get(choice));
-				break;
-		}
-		return result;
+		return cashier.purchase(this, cans.get(choice));
 	}
 
 	public int getChange() {
