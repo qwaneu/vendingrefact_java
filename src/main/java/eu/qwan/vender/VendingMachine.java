@@ -18,7 +18,7 @@ public class VendingMachine {
 		}
 	}
 
-	public void insertChip(Card card) {
+	public void insertCard(Card card) {
 		// TODO
 		// can't pay with chip in brittain
 		paymentMethod = PaymentMethod.CARD;
