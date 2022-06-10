@@ -5,34 +5,30 @@ import java.util.Map;
 
 public class VendingMachine {
 	public final Map<Choice, CanContainer> cans = new HashMap<>();
-	private Cashier cashier = new CashRegister();
+	private final CashRegister cashregister = new CashRegister();
+	private Cashier cashier = cashregister;
 	public Card card;
 	public int credit;
 
 	public void setValue(int value) {
-		cashier = new CashRegister();
 		credit += value;
+		cashregister.insert(value);
 	}
 
 	public void insertCard(Card card) {
-		cashier = new CardRegister();
+		cashier = new CardRegister(card);
 		this.card = card;
 	}
 
 	public Can deliver(Choice choice) {
 		if (cans.containsKey(choice)  && cans.get(choice).getAmount() > 0)
-			return cashier.purchase(this, cans.get(choice));
+			return cashier.purchase(cans.get(choice));
 		else
 			return Can.NONE;
 	}
 
 	public int getChange() {
-		int result = credit;
-		if (credit > 0) {
-			credit = 0;
-			return result;
-		}
-		return 0;
+		return cashregister.getChange();
 	}
 
 	public void configure(Choice choice, Can can, int amount) {
